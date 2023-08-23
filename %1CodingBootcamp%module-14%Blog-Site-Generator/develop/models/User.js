@@ -43,12 +43,13 @@ User.init(
         return newUserData;
       },
     },
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'user',
   }
-);
-
-module.exports = User;
+  );
+  
+  User.associate = (models) => {
+    User.hasMany(models.Blog, {
+      foreignKey: 'user_id',
+    });
+  };
+  
+  module.exports = User;
