@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tech Blog - Home</title>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Tech Blog</h1>
+    {{#if user}}
+      <a href="/dashboard">Dashboard</a>
+      <a href="/logout">Logout</a>
+    {{else}}
+      <a href="/signup">Sign Up</a>
+      <a href="/login">Login</a>
+    {{/if}}
+  </header>
+  
+  <main>
+    <h2>Recent Blog Posts</h2>
+    {{#each blogPosts}}
+      <div class="blog-post">
+        <h3>{{ this.title }}</h3>
+        <p>{{ this.content }}</p>
+        <p>By {{ this.User.name }}</p>
+        <p>Date: {{ this.createdAt }}</p>
+        <a href="/post/{{ this.id }}">Read more</a>
+      </div>
+    {{/each}}
+  </main>
+</body>
+</html>
+ 
