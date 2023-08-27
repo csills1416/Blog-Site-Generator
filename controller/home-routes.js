@@ -7,8 +7,8 @@ router.get('/', async (req, res) => {
   try {
     const posts = await db.Post.findAll({
       include: [
-        { model: db.User, attributes: ['username'] },
-        { model: db.Comment, include: { model: db.User, attributes: ['username'] } },
+        { model: db.User, attributes: ['name'] },
+        { model: db.Comment, include: { model: db.User, attributes: ['name'] } },
       ],
       order: [['createdAt', 'DESC']],
     });
