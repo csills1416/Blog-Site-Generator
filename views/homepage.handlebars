@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tech Blog - Home</title>
+  <title>Tech Blog - {{ post.title }}</title>
 </head>
 <body>
   <header>
@@ -16,17 +16,23 @@
   </header>
   
   <main>
-    <h2>Recent Blog Posts</h2>
-    {{#each blogPosts}}
-      <div class="blog-post">
-        <h3>{{ this.title }}</h3>
-        <p>{{ this.content }}</p>
-        <p>By {{ this.User.name }}</p>
-        <p>Date: {{ this.createdAt }}</p>
-        <a href="/post/{{ this.id }}">Read more</a>
-      </div>
-    {{/each}}
+    <article class="blog-post">
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.content }}</p>
+      <p>By {{ post.user.name }}</p>
+      <p>Date: {{ post.createdAt }}</p>
+    </article>
+    
+    <section class="comments-section">
+      <h3>Comments</h3>
+      {{#each post.Comments}}
+        <div class="comment">
+          <p>{{ this.content }}</p>
+          <p>By {{ this.user.name }}</p>
+          <p>Date: {{ this.createdAt }}</p>
+        </div>
+      {{/each}}
+    </section>
   </main>
 </body>
 </html>
- 

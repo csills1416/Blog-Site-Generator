@@ -21,18 +21,16 @@ app.use(passport.session());
 
 // Routes setup
 
-const homeRoutes = require('./controllers/home-routes');
-const authRoutes = require('./controllers/homeController');
-const dashboardRoutes = require('./controllers/dashboardController');
-const postRoutes = require('./controllers/postController');
+const homeRoutes = require('./controller/home-routes');
+const dashboardRoutes = require('./controller/dashboardController');
+const postRoutes = require('./controller/postController');
 
 app.use('/', homeRoutes);
-app.use('/', authRoutes);
 app.use('/', dashboardRoutes);
 app.use('/', postRoutes);
 
-db.sequelize.sync().then(() => {
+
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
   });
-});
+

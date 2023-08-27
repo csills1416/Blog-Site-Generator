@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 
 class Post extends Model {
   static associate(models) {
-    Post.belongsTo(models.User);
+    Post.belongsTo(models.User, {foreignKey: 'user_id'});
   }
 }
 
