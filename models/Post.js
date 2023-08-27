@@ -1,7 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/passport');
+const sequelize = require('../config/connection');
 
-class Post extends Model {}
+class Post extends Model {
+  static associate(models) {
+    Post.belongsTo(models.User);
+  }
+}
 
 Post.init(
   {

@@ -1,15 +1,10 @@
-const sequelize = require('../config/passport');
+const sequelize = require('../config/connection');
 
 const User = require('./User');
-
 const Post = require('./Post');
-
 const Comment = require('./Comment');
 
-
-
 // Set up associations
-
 User.hasMany(Post, {
     onDelete: 'cascade',
     onUpdate: 'cascade',
@@ -34,4 +29,4 @@ Comment.belongsTo(Post, {
     foreignKey: 'post_id'
 });
 
-module.exports = {User, Post, Comment};
+module.exports = { User, Post, Comment };
