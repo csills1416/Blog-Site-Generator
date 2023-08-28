@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 
     const userPosts = await db.Post.findAll({
       where: { userId },
-      include: [{ model: db.User, attributes: ['username'] }, { model: db.Comment }],
+      include: [{ model: db.User, attributes: ['name'] }, { model: db.Comment }],
     });
 
     res.render('dashboard', { userPosts }); // Render a dashboard view

@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
       order: [['createdAt', 'DESC']],
     });
 
-    res.render('home', { posts, user: req.user });
+    res.render('homepage', { posts, user: req.user });
   } catch (error) {
     console.error(error);
     res.status(500).send('An error occurred.');
@@ -26,8 +26,8 @@ router.get('/post/:id', async (req, res) => {
     const postId = req.params.id;
     const post = await db.Post.findByPk(postId, {
       include: [
-        { model: db.User, attributes: ['username'] },
-        { model: db.Comment, include: { model: db.User, attributes: ['username'] } },
+        { model: db.User, attributes: ['name'] },
+        { model: db.Comment, include: { model: db.User, attributes: ['name'] } },
       ],
     });
 

@@ -25,7 +25,7 @@ router.get('/all', async (req, res) => {
   try {
     const posts = await db.Post.findAll({
       include: [
-        { model: db.User, attributes: ['username'] }, // Include user information
+        { model: db.User, attributes: ['name'] }, // Include user information
         { model: db.Comment }, // Include comments
       ],
     });
@@ -45,8 +45,8 @@ router.get('/:id', async (req, res) => {
     const post = await db.Post.findOne({
       where: { id: postId },
       include: [
-        { model: db.User, attributes: ['username'] },
-        { model: db.Comment, include: { model: db.User, attributes: ['username'] } },
+        { model: db.User, attributes: ['name'] },
+        { model: db.Comment, include: { model: db.User, attributes: ['name'] } },
       ],
     });
 
