@@ -3,7 +3,20 @@ const session = require('express-session');
 const passport = require('passport');
 const db = require('./models');
 const app = express();
+const sequelize = require('./config/connection');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
 const PORT = process.env.PORT || 3000;
+
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
 
 // Middleware setup
 

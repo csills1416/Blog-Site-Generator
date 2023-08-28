@@ -4,12 +4,10 @@ const { User, Post, Comment } = require('./models'); // Update the path as neede
 const sampleUsers = [
   {
     name: 'John Doe',
-    email: 'john@example.com',
     password: 'password123',
   },
   {
     name: 'Jane Smith',
-    email: 'jane@example.com',
     password: 'securepassword',
   },
 ];

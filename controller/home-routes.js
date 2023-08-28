@@ -42,4 +42,31 @@ router.get('/post/:id', async (req, res) => {
   }
 });
 
+router.get('/', (req, res) => {
+  res.render('homepage');
+});
+
+// GET route for displaying the login form
+router.get('/login', (req, res) => {
+  res.render('login');
+});
+
+// GET route for displaying the signup form
+router.get('/signup', (req, res) => {
+  res.render('signup');
+});
+
+// POST route for handling signup form submission
+router.post('/signup', async (req, res) => {
+  try {
+      const { username, password } = req.body;
+
+      const newUser = await User.create({ username, password });
+
+      res.redirect('/'); 
+  } catch (error) {
+      res.render('signup', { error: 'User creation failed' });
+  }
+});
+
 module.exports = router;
