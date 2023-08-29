@@ -1,55 +1,25 @@
 const sequelize = require('./connection');
 const { User, Post, Comment } = require('./models'); // Update the path as needed
-
-const sampleUsers = [
-  {
-    name: 'John Doe',
-    password: 'password123',
-  },
-  {
-    name: 'Jane Smith',
-    password: 'securepassword',
-  },
-];
-
-const samplePosts = [
-  {
-    title: 'Sample Post 1',
-    content: 'This is the content of the first sample post.',
-    user_id: 1,
-  },
-  {
-    title: 'Sample Post 2',
-    content: 'This is the content of the second sample post.',
-    user_id: 2,
-  },
-];
-
-const sampleComments = [
-  {
-    content: 'Great post!',
-    user_id: 1,
-    post_id: 1,
-  },
-  {
-    content: 'I enjoyed reading this.',
-    user_id: 2,
-    post_id: 2,
-  },
-];
+const fs = require('fs/promises'); // Import the filesystem module
 
 async function seedDatabase() {
   try {
     await sequelize.sync({ force: true });
 
-    const users = await User.bulkCreate(sampleUsers, { individualHooks: true });
-    console.log('Users seeded successfully:', users.map(user => user.get({ plain: true })));
+    const usersData = await fs.readFile('users.json', 'utf-8');
+    const users = JSON.parse(usersData);
+    const createdUsers = await User.bulkCreate(users, { individualHooks: true });
+    console.log('Users seeded successfully:', createdUsers.map(user => user.get({ plain: true })));
 
-    const posts = await Post.bulkCreate(samplePosts);
-    console.log('Posts seeded successfully:', posts.map(post => post.get({ plain: true })));
+    const blogsData = await fs.readFile('blogs.json', 'utf-8');
+    const blogs = JSON.parse(blogsData);
+    const createdBlogs = await Post.bulkCreate(blogs);
+    console.log('Posts seeded successfully:', createdBlogs.map(blog => blog.get({ plain: true })));
 
-    const comments = await Comment.bulkCreate(sampleComments);
-    console.log('Comments seeded successfully:', comments.map(comment => comment.get({ plain: true })));
+    const commentsData = await fs.readFile('comments.json', 'utf-8');
+    const comments = JSON.parse(commentsData);
+    const createdComments = await Comment.bulkCreate(comments);
+    console.log('Comments seeded successfully:', createdComments.map(comment => comment.get({ plain: true })));
   } catch (error) {
     console.error('Error seeding database', error);
   } finally {
